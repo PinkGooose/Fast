@@ -2,6 +2,7 @@ from fastapi import APIRouter, status, Depends, HTTPException
 from sqlalchemy import or_
 from sqlalchemy.orm import Session
 
+from app.api.v1.dependencies import get_current_active_user
 from app.core.database import SessionLocal
 from app.models.user import User
 from app.schemas.user import UserRead, UserCreate
@@ -35,3 +36,7 @@ def register(user: UserCreate, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(db_user)
     return db_user
+
+@router.get("/me", response_model=UserRead)
+async def read_users_me(current_user: User = Depends(get_current_active_user)):
+    return current_user
