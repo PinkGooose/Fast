@@ -1,6 +1,7 @@
 fastapi
 uvicorn[standart]
 sqlalchemy
+alembic==1.18.4
 psycopg2-binary
 python-jose
 passlib[bcrypt]
