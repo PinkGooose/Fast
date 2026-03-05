@@ -3,6 +3,12 @@
 *.pyc
 __pycache__/
 .env
+
 alembic/__pycache__/
 alembic/versions/__pycache__/
 alembic.ini.local
+
+docker-compose.override.yml
+.env.docker
+*.log
+/data/
