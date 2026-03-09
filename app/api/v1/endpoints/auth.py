@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session
 
 from app.core.config import settings
 from app.core.database import SessionLocal
+from app.core.deps import get_db
 from app.models.user import User
 from app.schemas.token import Token
 from app.services.auth import verify_password
@@ -15,13 +16,6 @@ from app.services.auth import verify_password
 router = APIRouter()
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/token")
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 def authenticate_user(db: Session, username: str, password: str):
     user = db.query(User).filter(or_(User.username == username)).first()

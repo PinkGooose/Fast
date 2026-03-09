@@ -5,17 +5,11 @@ from jose import jwt, JWTError
 
 from app.core.config import settings
 from app.core.database import SessionLocal
+from app.core.deps import get_db
 from app.models.user import User
 from app.schemas.token import TokenData
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
     credentials_exception = HTTPException(

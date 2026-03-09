@@ -4,18 +4,12 @@ from sqlalchemy.orm import Session
 
 from app.api.v1.dependencies import get_current_active_user
 from app.core.database import SessionLocal
+from app.core.deps import get_db
 from app.models.user import User
 from app.schemas.user import UserRead, UserCreate
 from app.services.auth import get_password_hash
 
 router = APIRouter()
-
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 @router.post("/register", response_model=UserRead, status_code=status.HTTP_201_CREATED)
 def register(user: UserCreate, db: Session = Depends(get_db)):

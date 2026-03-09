@@ -1,4 +1,5 @@
 from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy.orm import relationship
 
 from app.core.database import Base
 
@@ -13,3 +14,5 @@ class User(Base):
     is_active = Column(Boolean, default=True)
     is_superuser = Column(Boolean, default=False)
     full_name = Column(String, nullable=True)
+
+    tasks = relationship("Task", back_populates="user", cascade="all, delete-orphan")
