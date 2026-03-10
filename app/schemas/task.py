@@ -12,8 +12,11 @@ class TaskBase(BaseModel):
     status: TaskStatus = TaskStatus.PENDING
     category: TaskCategory = TaskCategory.DAY
 
-class TaskCreate(TaskBase):
-    pass
+class TaskCreate(BaseModel):
+    title: str
+    description: Optional[str] = None
+    status: TaskStatus = TaskStatus.PENDING
+    category: TaskCategory = TaskCategory.DAY
 
 class TaskUpdate(BaseModel):
     title: Optional[str] = None

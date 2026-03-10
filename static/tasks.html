@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мои задачи</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="/">Главная</a>
+        <a href="/register">Регистрация</a>
+        <a href="/login">Вход</a>
+        <a href="/profile" id="profile-link">Профиль</a>
+        <a href="/tasks" id="tasks-link">Задачи</a>
+        <a href="/create-task" id="create-task-link">Создать задачу</a>
+        <a href="#" id="logout-link">Выход</a>
+    </nav>
+    <div class="container">
+        <h2>Мои задачи</h2>
+
+        <!-- Фильтры -->
+        <div class="filters">
+            <div class="filter-group">
+                <label for="filter-status">Статус</label>
+                <select id="filter-status">
+                    <option value="">Все</option>
+                    <option value="pending">Ожидает</option>
+                    <option value="in_progress">В процессе</option>
+                    <option value="completed">Завершено</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="filter-category">Категория</label>
+                <select id="filter-category">
+                    <option value="">Все</option>
+                    <option value="day">День</option>
+                    <option value="week">Неделя</option>
+                    <option value="month">Месяц</option>
+                    <option value="year">Год</option>
+                </select>
+            </div>
+            <button id="apply-filters">Применить</button>
+        </div>
+
+        <!-- Кнопка создания задачи (видна только на этой странице) -->
+        <div class="create-button-container">
+            <a href="/create-task" class="btn btn-primary">➕ Новая задача</a>
+        </div>
+
+        <!-- Список задач -->
+        <div id="tasks-list"></div>
+
+        <div id="message"></div>
+    </div>
+    <script src="/static/js/main.js?v=3"></script>
+</body>
+</html>

@@ -10,9 +10,9 @@ from app.models.user import User
 from app.models.task import Task as TaskModel, TaskStatus, TaskCategory
 from app.schemas.task import Task, TaskCreate, TaskUpdate
 
-router = APIRouter(prefix="/tasks", tags=["tasks"])
+router = APIRouter()
 
-@router.get("/", response_model=Task, status_code=status.HTTP_201_CREATED)
+@router.post("/", response_model=Task, status_code=status.HTTP_201_CREATED)
 def create_task(
         task_in: TaskCreate,
         db: Session = Depends(get_db),
@@ -53,7 +53,7 @@ def read_task(
     current_user: User = Depends(get_current_user),
 ):
     task = db.query(TaskModel).filter(
-        and_(TaskModel.id == task_id, TaskModel.user_id == current_user)
+        and_(TaskModel.id == task_id, TaskModel.user_id == current_user.id)
     ).first()
     if not task:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Task not found")
@@ -67,7 +67,7 @@ def update_task(
         current_user: User = Depends(get_current_user),
 ):
     task = db.query(TaskModel).filter(
-        and_(TaskModel.id == task_id, TaskModel.user_id == current_user)
+        and_(TaskModel.id == task_id, TaskModel.user_id == current_user.id)
     ).first()
 
     update_data = task_update.model_dump(exclude_unset=True)
@@ -85,7 +85,7 @@ def delete_task(
         current_user: User = Depends(get_current_user),
 ):
     task = db.query(TaskModel).filter(
-        and_(TaskModel.id == task_id, TaskModel.user_id == current_user)
+        and_(TaskModel.id == task_id, TaskModel.user_id == current_user.id)
     ).first()
     if not task:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Task not found")

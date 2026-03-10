@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Новая задача</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="/">Главная</a>
+        <a href="/register">Регистрация</a>
+        <a href="/login">Вход</a>
+        <a href="/profile" id="profile-link">Профиль</a>
+        <a href="/tasks" id="tasks-link">Задачи</a>
+        <a href="/create-task" id="create-task-link">Создать задачу</a>
+        <a href="#" id="logout-link">Выход</a>
+    </nav>
+    <div class="container">
+        <h2>Создание новой задачи</h2>
+
+        <form id="task-form">
+            <div class="form-group">
+                <label for="title">Название</label>
+                <input type="text" id="title" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Описание</label>
+                <textarea id="description" name="description" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="category">Категория</label>
+                <select id="category" name="category">
+                    <option value="day">День</option>
+                    <option value="week">Неделя</option>
+                    <option value="month">Месяц</option>
+                    <option value="year">Год</option>
+                </select>
+            </div>
+            <button type="submit">Создать</button>
+            <a href="/tasks" class="btn btn-secondary">Отмена</a>
+        </form>
+
+        <div id="message"></div>
+    </div>
+    <script src="/static/js/main.js?v=3"></script>
+</body>
+</html>
